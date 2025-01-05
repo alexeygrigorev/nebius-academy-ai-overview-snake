@@ -1,8 +1,6 @@
 // src/components/SnakeGame.jsx
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Moon, Sun } from 'lucide-react';
-// import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
-
 const GRID_SIZE = 20;
 const CELL_SIZE = 20;
 const INITIAL_SNAKE = [
@@ -27,8 +25,8 @@ const SnakeGame = () => {
     let newFood;
     do {
       newFood = {
-        x: Math.floor(Math.random() * (GRID_SIZE - 2)) + 1,
-        y: Math.floor(Math.random() * (GRID_SIZE - 2)) + 1
+        x: Math.floor(Math.random() * (GRID_SIZE - 1)) + 1,
+        y: Math.floor(Math.random() * (GRID_SIZE - 1)) + 1
       };
     } while (snake.some(segment => segment.x === newFood.x && segment.y === newFood.y));
     setFood(newFood);
@@ -94,12 +92,12 @@ const SnakeGame = () => {
         break;
     }
 
-    // Check collision with walls (adjusted to be 1 cell away from edges)
+    // Check collision with walls (matching the visual border)
     if (
-      head.x < 1 ||
-      head.x >= GRID_SIZE - 1 ||
-      head.y < 1 ||
-      head.y >= GRID_SIZE - 1
+      head.x < 0 ||
+      head.x >= GRID_SIZE ||
+      head.y < 0 ||
+      head.y >= GRID_SIZE
     ) {
       setGameOver(true);
       return;
